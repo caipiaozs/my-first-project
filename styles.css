@@ -1,4 +1,4 @@
-/* GitHub版本控制学习项目样式文件 */
+/* GitHub版本控制学习项目样式文件 - GitHub Pages优化版 */
 
 /* 基础样式 */
 * {
@@ -34,6 +34,7 @@ h1 {
     margin-bottom: 30px;
     font-size: 2.8rem;
     font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -57,11 +58,18 @@ h3 {
     font-size: 1.2rem;
     color: #7f8c8d;
     margin-bottom: 30px;
-    padding: 10px;
-    background: #ecf0f1;
+    padding: 15px;
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
     border-radius: 25px;
-    display: inline-block;
-    width: 100%;
+    border: 2px solid #28a745;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
 }
 
 /* 功能卡片 */
@@ -71,12 +79,30 @@ h3 {
     margin: 20px 0;
     border-radius: 15px;
     border-left: 5px solid #3498db;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #2ecc71, #f39c12, #e74c3c);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .feature:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+}
+
+.feature:hover::before {
+    opacity: 1;
 }
 
 /* 列表样式 */
@@ -109,15 +135,51 @@ li:before {
     transition: all 0.3s ease;
     margin: 10px 5px;
     font-weight: 600;
+    border: 2px solid transparent;
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+    border-color: #2980b9;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* 链接网格 */
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.link-grid a {
+    display: block;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.link-grid a:hover {
+    background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+    transform: scale(1.05);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
     .container {
         padding: 20px;
         margin: 10px;
@@ -133,6 +195,16 @@ li:before {
     
     .feature {
         padding: 15px;
+    }
+    
+    .link-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
     }
 }
 
@@ -151,6 +223,13 @@ li:before {
 .feature {
     animation: fadeInUp 0.6s ease-out;
 }
+
+.feature:nth-child(1) { animation-delay: 0.1s; }
+.feature:nth-child(2) { animation-delay: 0.2s; }
+.feature:nth-child(3) { animation-delay: 0.3s; }
+.feature:nth-child(4) { animation-delay: 0.4s; }
+.feature:nth-child(5) { animation-delay: 0.5s; }
+.feature:nth-child(6) { animation-delay: 0.6s; }
 
 /* 代码块样式 */
 code {
@@ -184,4 +263,58 @@ pre {
     height: 100%;
     border-radius: 10px;
     transition: width 0.6s ease;
+}
+
+/* 页脚样式 */
+footer {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    color: white;
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* GitHub Pages 特殊样式 */
+.github-pages-badge {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+@media (max-width: 768px) {
+    .github-pages-badge {
+        position: static;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+}
+
+/* 加载动画 */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
